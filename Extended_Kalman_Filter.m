@@ -20,12 +20,12 @@ m    = length(t);               % Length of the time scale
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 A  =  diag([1 1 1 1],2);                            % Dynamic system model
 B  = [zeros(4,2);eye(2)];                           % Control model
-G  = [zeros(2);eye(2);zeros(2)];                    % Error model
-Gn = [zeros(4,2);eye(2)];                           % Error model (for estimation for constant acceleration model)
+G  = [zeros(2);eye(2);zeros(2)];                    % Noise model
+Gn = [zeros(4,2);eye(2)];                           % Noise model (acceleration)
 %%%%% Continuous to Discrete (if discrete model is being used) %%%%%
-[phi,gamw]  = c2d(A,G ,dt);                                                           % Error - dynamic model discretization
-[phi,gamwn] = c2d(A,Gn,dt);                                                           % Error (acceleration) - dynamic model discretization
-[phi,gam]   = c2d(A,B ,dt);                                                           % Control - dynamic model discretization
+[phi,gamw]  = c2d(A,G ,dt);                         % Noise - dynamic model discretization
+[phi,gamwn] = c2d(A,Gn,dt);                         % Noise (acceleration) - dynamic model discretization
+[phi,gam]   = c2d(A,B ,dt);                         % Control - dynamic model discretization
 
 %%%%%%%%%%%%% Initial State %%%%%%%%%%%%%%%%%
 x0 =  [10 15 11.11 8.33 0 0]';
